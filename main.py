@@ -7,18 +7,19 @@ import routes
 import sys
 
 class Params:
-    V0 = 25
-    Va = 25
-    STD = 0.05
-    N = 30
+    V0 = 15
+    Va = 18
+    STD = 0.2
+    N = 100
 
 
-curroute = routes.Route(routes.r627k_stops, speed=Params.V0, name="627к")
+curroute = routes.Route(routes.r223_stops, speed=Params.V0, name="223" + f" | Vs={Params.V0}, Va={Params.Va}, R50 σ²={Params.STD}")
 
+print(curroute)
 # sys.exit(0)
 
 base_picture, stats = graphify.generate_graph_base(curroute)
-base_picture[0].canvas.manager.set_window_title(f'{curroute.name}-{Params.V0}-{Params.Va}-{Params.STD}')
+base_picture[0].canvas.manager.set_window_title(f'{curroute.name.split("|")[0].strip()}-{Params.V0}-{Params.Va}-{Params.STD}')
 
 
 tgen = TripGenerator(curroute, speed=Params.Va, std=Params.STD)
